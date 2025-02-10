@@ -1,1 +1,63 @@
+Recon workflow
+IP space discovery
+TLDs, Acquisitions, & Relations
+Subdomain Enum
+Fingerpirnting
+Dorking
+Content Discovery
+Parameter Discovery
 
+
+1.ASN Discovery
+ASN Discovery of Target:
+Method 1 : https://bgp.he.net
+
+Method 2 : ASN using whois: whois -h whois.cymru.com $(dig +short example.com)
+PS: Be careful cause sometimes you might get ASN for VPSs like digital ocean etc. Don't work on them.
+
+Method 3 : Using Nmap & ASN for discoverying IP related to the targetted ASN : nmap --script targets-asn --script-args targets-asn.asn=<ASN Number>
+
+Method 4 : ARIN for ASN: https://whois.arin.net
+
+Method 5 : Gathering Company intel using AMASS : amass intel -org <Organisation name(not domain)>
+
+Method 6 : IPINFO for ASN : https://ipinfo.io
+
+2. Subdomains Enumeration using ASNs using AMASS:
+
+amass intel -asn <ASN_number>
+
+Discovering Brands
+-Looking for acquisition or related orgs to target
+
+wikipedia
+
+Crunchbase
+
+Crunchbase: Discover innovative companies and the people behind them
+
+Owler
+
+Accquiredby
+
+AcquiredBy | Definitive list of bootstrapped acquisitions
+
+LinkedIn
+
+ReverseWhois using amass intel module
+
+amass intel -d [domain.com](http://domain.com) -whois
+
+BuiltWith
+
+BuiltWith
+
+Google dork:
+
+intext:"copyright ©️ org_name"
+
+Shodan Dork using HTTP favicon hashes
+
+http.favicon.hash:<hash>
+
+Favicon hash can be found using favfreak
