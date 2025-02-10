@@ -23,9 +23,8 @@ Method 5 : Gathering Company intel using AMASS : amass intel -org <Organisation 
 
 Method 6 : IPINFO for ASN : https://ipinfo.io
 
-2. Subdomains Enumeration using ASNs using AMASS: amass intel -asn <ASN_number>
 
-3. Discovering Brands - Looking for acquisition or related orgs to target
+2. Discovering Brands - Looking for acquisition or related orgs to target
   (i)wikipedia
   (ii)Crunchbase -> Crunchbase: Discover innovative companies and the people behind them
   (iii)Owler
