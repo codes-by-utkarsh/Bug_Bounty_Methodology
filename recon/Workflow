@@ -1,8 +1,4 @@
-Recon workflow
-IP space discovery
-TLDs, Acquisitions, & Relations
-Subdomain Enum
-Fingerpirnting
-Dorking
-Content Discovery
-Parameter Discovery
+For a webpage , Here are the steps to start the bug finding
+
+1. use "amass intel [options] [-whois -d DOMAIN] [-addr ADDR -asn ASN -cidr CIDR]"
+2. Go to shodan
