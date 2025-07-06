@@ -50,3 +50,10 @@ Combining Results : cat *_subs.txt | sort -u | anew all_subs.txt
 
 8. Identify SQL Injection Points
    Command : cat allurls.txt | grep -E ".php|.asp|.aspx|.jspx|.jsp" | grep '=' | sed 's/=.*$/=/' | sort | uniq > bsqli.txt
+
+
+
+Conclusion : 
+This comprehensive bug-hunting methodology equips you with the tools and techniques needed to uncover vulnerabilities effectively. By following these steps and using the recommended tools, you can conduct thorough penetration tests and improve the security posture of your target systems.
+
+Happy Hunting!
