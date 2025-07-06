@@ -27,6 +27,6 @@ Bug hunting is an intricate process that requires persistence, knowledge, and th
 ### 1️⃣ Setup & Initialization
 
 ```bash
-# Create and navigate to a working directory
 mkdir example
 cd example
+
