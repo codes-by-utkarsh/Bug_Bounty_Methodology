@@ -29,4 +29,106 @@ Bug hunting is an intricate process that requires persistence, knowledge, and th
 ```bash
 mkdir example
 cd example
+```
 
+---
+
+### 2️⃣ Subdomain Enumeration
+
+#### ✅ Using Subfinder
+
+```bash
+subfinder -d example.com -all -recursive > subfinder_subs.txt
+cat subfinder_subs.txt | wc -l
+```
+
+#### ✅ Using crt.sh + jq
+
+```bash
+sudo apt install -y jq
+curl -s "https://crt.sh/?q=%.example.com&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u > crtsh_subs.txt
+```
+
+#### ✅ GitHub Subdomains
+
+```bash
+github-subdomains -d target.com -t YOUR_GITHUB_TOKEN -o github_subs.txt
+```
+
+#### ✅ Using FFuF for Fuzzing
+
+```bash
+ffuf -u https://FUZZ.target.com -w wordlist.txt -t 50 -mc 200,403 -o ffuf_subs.txt
+```
+
+**Combine all results:**
+
+```bash
+cat *_subs.txt | sort -u | anew all_subs.txt
+```
+
+---
+### 3️⃣ Subdomain Status Check
+
+```bash
+# Check for alive subdomains
+cat all_subs.txt | httpx-toolkit -ports 80,443,8080,8000,8888 -threads 200 > subdomains_alive.txt
+
+# Count live subdomains
+cat subdomains_alive.txt | wc -l
+```
+
+---
+### 4️⃣ Subdomain Takeover
+
+```bash
+# Using Subzy
+subzy run -dL subdomains_alive.txt
+
+# Using Nuclei
+nuclei -l subdomains_alive.txt -t /path/to/nuclei-templates/ -stats -v
+```
+
+---
+
+### 5️⃣ URL Discovery
+
+```bash
+# Using Katana
+katana -u subdomains_alive.txt -d 5 -kf -jc -fx -ef woff,pdf,css,png,svg,jpg,woff2,jpeg,gif -o allurls.txt
+```
+
+---
+
+### 6️⃣ Search for Sensitive Files
+
+```bash
+cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.json|\.gz|\.rar|\.zip|\.config"
+```
+
+---
+
+### 7️⃣ Directory Bruteforcing
+
+**Recommended Tools:**
+
+- **FFuF**
+
+  ```bash
+  ffuf -u https://example.com/FUZZ -w wordlist.txt -H "User-Agent: CustomAgent" -r
+  ```
+
+- **Dirsearch**
+
+  ```bash
+  dirsearch -l subdomains_alive.txt -e conf,config,bak,backup,swp,old,db,sql,asp,aspx,py,rb,php,tar,zip,log,json,xml,js
+  ```
+
+- **Google Dorks**
+
+  - [Dork King](https://dorkking.blindf.com/)
+  - [Dork for Me](https://dorkforme.netlify.app/)
+
+> **💡 NOTE:** Always brute-force directories on forbidden pages (403) and custom `404` pages; they often leak hidden resources.
+
+---
