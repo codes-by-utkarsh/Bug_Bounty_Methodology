@@ -132,3 +132,55 @@ cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.js
 > **💡 NOTE:** Always brute-force directories on forbidden pages (403) and custom `404` pages; they often leak hidden resources.
 
 ---
+### 8️⃣ CORS Misconfiguration
+
+```bash
+# Using Corsy
+python3 corsy.py -i subdomains_alive.txt -t 10 --headers "User-Agent: GoogleBot\nCookie: SESSION=Hacked"
+```
+
+---
+
+### 9️⃣ Identify SQL Injection Points
+
+```bash
+cat allurls.txt | grep -E "\.php|\.asp|\.aspx|\.jspx|\.jsp" | grep '=' | sed 's/=.*$/=/' | sort -u > bsqli.txt
+```
+
+---
+
+## 🍃 Low Hanging Fruits
+
+- **Broken Link Hijacking:**  
+  Tool: `broken-link-checker`  
+  ```bash
+  blc -link- -rov --filter-level 0
+  ```
+
+- **Origin IP Disclosure:**  
+  Use [shodan.io](https://www.shodan.io/) and SPF validators like [kitterman.com/spf/validate.html](http://www.kitterman.com/spf/validate.html).
+
+- **Session Management:**  
+  Check if sessions persist after logout on other devices.
+
+- **Long Password DOS Attack**
+
+- **Web Cache Poisoning**
+
+---
+
+## 🏢 Business Logic Vulnerabilities
+
+- **Price Manipulation**
+- **Parameter Tampering**
+- **Tamper HTTP Methods:**  
+  Test `GET ↔ POST ↔ PUT ↔ PATCH ↔ DELETE`
+
+---
+
+## ✅ Conclusion
+
+This comprehensive bug hunting methodology equips you with the tools and techniques needed to uncover vulnerabilities effectively.  
+By following these steps and practicing consistently, you can conduct thorough penetration tests and improve the security posture of your targets.
+
+**🔒 Happy Hunting & Hack Responsibly!**
