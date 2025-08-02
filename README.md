@@ -57,7 +57,7 @@ github-subdomains -d target.com -t YOUR_GITHUB_TOKEN -o github_subs.txt
 
 #### ✅ Web Archive 
 ```bash
-curl -G "https://web.archive.org/cdx/search/cdx" --data-urlencode "url=*.example.com/*" --data-urlencode "collapse=urlkey" --data-urlencode "output-text" --data-urlencode "fl-original" > out.txt
+curl -G "https://web.archive.org/cdx/search/cdx" --data-urlencode "url=*.example.com/*" --data-urlencode "collapse=urlkey" --data-urlencode "output-text" --data-urlencode "fl-original" > out.txt | cat out.txt | uro | grep '-E \.xls/\.xml|\.xlsx|\.json|\.pdf|\.sql|\.doc|\.docx|\.pptx|\.txt|\.zip|\.tar.gz|\.tgz |\.bak|\.7z|\.rar|\.log|\.cache|\.secret|\.db|\.bokkup|\.yml|\.gz|\.config|\.csv|\.yaml|\.md|\.md5|\.exe|\.dll|\.bin|\.1 ni|\.bat|\.sh|\.tar|\.deb|\.rpm|\.iso|\.img|\.apk|\.msi|\.dmg|\.tmp|\.crt|\.pem|\.key|\.pub/\.asc'
 ```
 NOTE: For all 404 Not Found on the interesting URLs go through the web.archive.org if there is a log which might can hold something
 
