@@ -55,6 +55,12 @@ curl -s "https://crt.sh/?q=%.example.com&output=json" | jq -r '.[].name_value' |
 github-subdomains -d target.com -t YOUR_GITHUB_TOKEN -o github_subs.txt
 ```
 
+#### ✅ Web Archive 
+```bash
+curl -G "https://web.archive.org/cdx/search/cdx" --data-urlencode "url=*.dell.com/*" --data-urlencode "collapse=urlkey" --data-urlencode "output-text" --data-urlencode "fl-original" > out.txt
+```
+NOTE: For all 404 Not Found on the interesting URLs go through the web.archive.org if there is a log which might can hold something
+
 #### ✅ Using FFuF for Fuzzing
 
 ```bash
